@@ -68,13 +68,14 @@ struct MainView: View {
     var personList: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 10) {
-                ForEach(0..<vm.peopleResult.count, id: \.self) { index in
+                ForEach(vm.peopleResult.indices, id: \.self) { index in
+                    let item = vm.peopleResult[index]
                     StarWarsItemView(pageType: .main,
                                      type: .people,
-                                     personParams: (name: vm.peopleResult[index].name,
-                                                    sex: vm.peopleResult[index].gender,
-                                                    starshipCount: String(vm.peopleResult[index].starships.count)),
-                                     addToFavorite: {vm.addPeopleToFavorite(peopleItem: vm.peopleResult[index], index: index)},
+                                     personParams: (name: item.name,
+                                                    sex: item.gender,
+                                                    starshipCount: String(item.starships.count)),
+                                     addToFavorite: {vm.addPeopleToFavorite(peopleItem: item, index: index)},
                                      isFavorite: vm.favoritePeople.count > 0 ? vm.favoritePeople[index] : false)
                 }
             }
@@ -85,14 +86,15 @@ struct MainView: View {
     var starshipList: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 10) {
-                ForEach(0..<vm.starshipResult.count, id: \.self) { index in
+                ForEach(vm.starshipResult.indices, id: \.self) { index in
+                    let item = vm.starshipResult[index]
                     StarWarsItemView(pageType: .main,
                                      type: .starship,
-                                     starshipParams: (name: vm.starshipResult[index].name,
-                                                      model: vm.starshipResult[index].model,
-                                                      manufacturer: vm.starshipResult[index].manufacturer,
-                                                      passengers: vm.starshipResult[index].passengers),
-                                     addToFavorite: {vm.addStarshipToFavorite(starshipItem: vm.starshipResult[index], index: index)},
+                                     starshipParams: (name: item.name,
+                                                      model: item.model,
+                                                      manufacturer: item.manufacturer,
+                                                      passengers: item.passengers),
+                                     addToFavorite: {vm.addStarshipToFavorite(starshipItem: item, index: index)},
                                      isFavorite: vm.favoriteStarship.count > 0 ? vm.favoriteStarship[index] : false)
                 }
             }
@@ -103,13 +105,14 @@ struct MainView: View {
     var planetList: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 10) {
-                ForEach(0..<vm.planetResult.count, id: \.self) { index in
+                ForEach(vm.planetResult.indices, id: \.self) { index in
+                    let item = vm.planetResult[index]
                     StarWarsItemView(pageType: .main,
                                      type: .planet,
-                                     planetParams: (name: vm.planetResult[index].name,
-                                                    diameter: vm.planetResult[index].diameter,
-                                                    population: vm.planetResult[index].population),
-                                     addToFavorite: {vm.addPlanetToFavorite(planetItem: vm.planetResult[index], index: index)},
+                                     planetParams: (name: item.name,
+                                                    diameter: item.diameter,
+                                                    population: item.population),
+                                     addToFavorite: {vm.addPlanetToFavorite(planetItem: item, index: index)},
                                      isFavorite: vm.favoriteStarship.count > 0 ? vm.favoritePlanet[index] : false)
                 }
             }

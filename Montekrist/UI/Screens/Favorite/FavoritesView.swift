@@ -48,12 +48,13 @@ struct FavoritesView: View {
     var personList: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 10) {
-                ForEach(0..<vm.peopleResult.count, id: \.self) { index in
+                ForEach(vm.peopleResult.indices, id: \.self) { index in
+                    let item = vm.peopleResult[index]
                     StarWarsItemView(pageType: .favorite,
                                      type: .people,
-                                     personParams: (name: vm.peopleResult[index].name,
-                                                    sex: vm.peopleResult[index].gender,
-                                                    starshipCount: String(vm.peopleResult[index].starships.count)))
+                                     personParams: (name: item.name,
+                                                    sex: item.gender,
+                                                    starshipCount: String(item.starships.count)))
                 }
             }
             .padding()
@@ -63,13 +64,14 @@ struct FavoritesView: View {
     var starshipList: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 10) {
-                ForEach(0..<vm.starshipResult.count, id: \.self) { index in
+                ForEach(vm.starshipResult.indices, id: \.self) { index in
+                    let item = vm.starshipResult[index]
                     StarWarsItemView(pageType: .favorite,
                                      type: .starship,
-                                     starshipParams: (name: vm.starshipResult[index].name,
-                                                      model: vm.starshipResult[index].model,
-                                                      manufacturer: vm.starshipResult[index].manufacturer,
-                                                      passengers: vm.starshipResult[index].passengers))
+                                     starshipParams: (name: item.name,
+                                                      model: item.model,
+                                                      manufacturer: item.manufacturer,
+                                                      passengers: item.passengers))
                 }
             }
             .padding()
@@ -79,12 +81,13 @@ struct FavoritesView: View {
     var planetList: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 10) {
-                ForEach(0..<vm.planetResult.count, id: \.self) { index in
+                ForEach(vm.planetResult.indices, id: \.self) { index in
+                    let item = vm.planetResult[index]
                     StarWarsItemView(pageType: .favorite,
                                      type: .planet,
-                                     planetParams: (name: vm.planetResult[index].name,
-                                                    diameter: vm.planetResult[index].diameter,
-                                                    population: vm.planetResult[index].population))
+                                     planetParams: (name: item.name,
+                                                    diameter: item.diameter,
+                                                    population: item.population))
                 }
             }
             .padding()
