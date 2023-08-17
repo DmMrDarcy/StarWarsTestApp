@@ -154,9 +154,9 @@ extension MainView {
                     }
                 } receiveValue: { [weak self] result in
                     guard let self = self else {return}
-                    self.peopleResult = result.people.results
-                    self.starshipResult = result.starships.results
-                    self.planetResult = result.planets.results
+                    self.peopleResult = result.people
+                    self.starshipResult = result.starships
+                    self.planetResult = result.planets
                     
                     self.favoritePeople = Array(repeating: false, count: self.peopleResult.count)
                     self.favoriteStarship = Array(repeating: false, count: self.starshipResult.count)

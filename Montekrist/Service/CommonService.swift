@@ -11,7 +11,7 @@ import SwiftUI
 
 protocol CommonServiceProtocol: AnyObject {
     func getStarWars(query: String) -> AnyPublisher<StarWarsModel, NetworkError>
-    func getFavorite() -> AnyPublisher<FavoriteStarWarsModel, Never>
+    func getFavorite() -> AnyPublisher<StarWarsModel, Never>
 }
 
 extension DIContainer {
@@ -39,17 +39,17 @@ extension DIContainer {
             
             return Publishers.CombineLatest3(peoplePublisher, planetPublisher, starshipPublisher)
                 .map { people, planets, starships in
-                    return StarWarsModel(people: people, planets: planets, starships: starships)
+                    return StarWarsModel(people: people.results, planets: planets.results, starships: starships.results)
                 }
                 .eraseToAnyPublisher()
         }
         
-        func getFavorite() -> AnyPublisher<FavoriteStarWarsModel, Never> {
+        func getFavorite() -> AnyPublisher<StarWarsModel, Never> {
             let favoritePeople = appState[\.appData.favoritePeople]
             let favoriteStarship = appState[\.appData.favoriteStarship]
             let favoritePlanet = appState[\.appData.favoritePlanet]
             
-            let mergedData = FavoriteStarWarsModel(people: favoritePeople, planets: favoritePlanet, starships: favoriteStarship)
+            let mergedData = StarWarsModel(people: favoritePeople, planets: favoritePlanet, starships: favoriteStarship)
                 return Just(mergedData)
                     .eraseToAnyPublisher()
         }
